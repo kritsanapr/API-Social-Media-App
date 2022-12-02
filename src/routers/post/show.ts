@@ -12,7 +12,7 @@ router.get(
     }
 
     try {
-      const post = await Post.findOne({ _id: id });
+      const post = await Post.findOne({ _id: id }).populate("comments");
       return res.status(200).json(post);
     } catch (err) {
       const error = new Error("post cannot be delete") as CustomError;
