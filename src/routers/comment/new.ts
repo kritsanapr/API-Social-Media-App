@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import Comment from "../../models/comment";
 import Post from "../../models/posts";
-
+import { BadRequestError } from "../../../common";
 const router = Router();
 
 router.post(
@@ -11,7 +11,7 @@ router.post(
     const { postId } = req.params;
 
     if (!content) {
-      const error = new Error("Content is required") as CustomError;
+      const error = new BadRequestError("Content is required") as CustomError;
       error.status = 400;
       return next(error);
     }

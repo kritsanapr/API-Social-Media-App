@@ -14,7 +14,12 @@ import cookieSession from "cookie-session";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import { requireAuth, currentUser } from "../common/index";
+import {
+  requireAuth,
+  currentUser,
+  errorHandler,
+  NotFoundError,
+} from "../common/index";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -24,6 +29,7 @@ declare global {
   }
 }
 
+app.use(errorHandler);
 app.set("trust proxy", true);
 app.use(
   cookieSession({
@@ -36,14 +42,6 @@ app.use(
     origin: "*",
     optionsSuccessStatus: 200,
   })
-);
-app.use(
-  (error: CustomError, req: Request, res: Response, next: NextFunction) => {
-    if (error.status) {
-      return res.status(error.status).json({ message: error.message });
-    }
-    res.status(500).json({ message: "something went wrong" });
-  }
 );
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -58,9 +56,7 @@ app.use(requireAuth, newCommentRouter);
 app.use(deleteCommentRouter);
 
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
-  const error = new Error("not found!") as CustomError;
-  error.status = 404;
-  next(error);
+  next(new NotFoundError());
 });
 const start = () => {
   if (!process.env.MONGO_URI) throw new Error("MONGO_URI is required");
