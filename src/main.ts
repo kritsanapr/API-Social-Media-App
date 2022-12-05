@@ -14,7 +14,7 @@ import cookieSession from "cookie-session";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import { requireAuth } from "../common/index";
+import { requireAuth, currentUser } from "../common/index";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -48,6 +48,7 @@ app.use(
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use(currentUser);
 app.use(requireAuth, newPostRouter);
 app.use(requireAuth, deletePostRouter);
 app.use(requireAuth, updatePostRouter);
