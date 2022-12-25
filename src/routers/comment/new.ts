@@ -15,7 +15,7 @@ router.post(
       error.status = 400;
       return next(error);
     }
-    const newComment = new Comment({
+    const newComment = Comment.build({
       userName: userName ? userName : "anonymous",
       content,
     });

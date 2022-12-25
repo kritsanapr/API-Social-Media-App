@@ -24,12 +24,16 @@ router.delete(
       return next(error);
     }
 
-    await Post.findOneAndUpdate(
+    const post = await Post.findOneAndUpdate(
       { _id: postId },
-      { $pull: { comments: commentId } }
+      { $pull: { comments: commentId } },
+      { new: true }
     );
 
-    return res.status(200).json({ success: true });
+    if (!post) return next(new Error());
+
+    // return res.status(200).json({ success: true });
+    return res.status(200).json(post);
   }
 );
 export { router as deleteCommentRouter };
