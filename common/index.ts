@@ -8,6 +8,8 @@ export * from "./src/error/custom-error";
 export * from "./src/error/database-connection-error";
 export * from "./src/error/not-authrized-error";
 export * from "./src/error/not-found-error";
+export * from "./src/error/request-validation-error";
 
 export * from "./src/middlewares/error-handler";
 export * from "./src/middlewares/upload-img";
+export * from "./src/middlewares/validation-request";

@@ -1,12 +1,31 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { User } from "../../models/user";
-import { authenticationService, BadRequestError } from "../../../common";
+import {
+  authenticationService,
+  BadRequestError,
+  RequestValidationError,
+} from "../../../common";
 import jwt from "jsonwebtoken";
+import { body, validationResult } from "express-validator";
+
 const router = Router();
 
 router.post(
   "/signin",
+  [
+    body("email").isEmpty().isEmail().withMessage("a valid email is required"),
+    body("password")
+      .not()
+      .isEmpty()
+      .isLength({ min: 6 })
+      .withMessage("a valid password is required"),
+  ],
   async (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return next(new RequestValidationError(errors.array()));
+    }
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
 
