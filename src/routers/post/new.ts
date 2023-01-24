@@ -1,5 +1,9 @@
 import { Router, Request, Response, NextFunction } from "express";
-import { BadRequestError, NotAuthorizedError } from "../../../common";
+import {
+  BadRequestError,
+  NotAuthorizedError,
+  uploadImage,
+} from "../../../common";
 import Post from "../../models/posts";
 import { User } from "../../models/user";
 
@@ -7,6 +11,7 @@ const router = Router();
 
 router.post(
   "/api/post/new",
+  uploadImage,
   async (req: Request, res: Response, next: NextFunction) => {
     const { title, content } = req.body;
 

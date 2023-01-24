@@ -10,3 +10,4 @@ export * from "./src/error/not-authrized-error";
 export * from "./src/error/not-found-error";
 
 export * from "./src/middlewares/error-handler";
+export * from "./src/middlewares/upload-img";
