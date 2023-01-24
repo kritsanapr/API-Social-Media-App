@@ -8,6 +8,8 @@ import {
   showPostRouter,
   newCommentRouter,
   deleteCommentRouter,
+  deleteImageRouter,
+  addImagesRouter,
 } from "./routers";
 import cors from "cors";
 import cookieSession from "cookie-session";
@@ -50,6 +52,9 @@ app.use(currentUser);
 app.use(requireAuth, newPostRouter);
 app.use(requireAuth, deletePostRouter);
 app.use(requireAuth, updatePostRouter);
+app.use(requireAuth, deleteImageRouter);
+app.use(requireAuth, addImagesRouter);
+
 app.use(showPostRouter);
 
 app.use(requireAuth, newCommentRouter);
