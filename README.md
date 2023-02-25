@@ -9,5 +9,5 @@
 - [x] Comment Create Read Update Delete.
 - [x] Upload Images.
 - [x] Delete Images.
-- [ ] Write tests.
-- [ ] Refactor code.
+- [x] Write tests.
+- [x] Refactor code.
