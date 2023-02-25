@@ -30,12 +30,6 @@ router.post(
         new BadRequestError("user with the same email already exists")
       );
 
-    // const newUser = new User({
-    //   email,
-    //   password,
-    //   post: [],
-    // });
-
     const newUser = User.build({
       email,
       password,

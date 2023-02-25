@@ -8,6 +8,6 @@
 - [x] Post Create Read Update Delete.
 - [x] Comment Create Read Update Delete.
 - [x] Upload Images.
-- [ ] Delete Images.
+- [x] Delete Images.
 - [ ] Write tests.
 - [ ] Refactor code.

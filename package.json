@@ -6,7 +6,15 @@
   "scripts": {
     "complie": "tsc && node ./dist/src/main.js",
     "start": "nodemon -e ts --exec \"npm run complie\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --no-cache",
+    "jest-cli": "jest"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
   },
   "repository": {
     "type": "git",
