@@ -60,6 +60,12 @@ app.use(showPostRouter);
 app.use(requireAuth, newCommentRouter);
 app.use(deleteCommentRouter);
 
+app.get('/help-check', (req, res) => {
+  res.status(200).json({
+    msg: 'help check working.'
+  })
+});
+
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
   next(new NotFoundError());
 });
