@@ -4,3 +4,9 @@ package-lock.json
 .env
 
 node_modules
+
+.DS_Store
+common/.DS_Store
+common/src/.DS_Store
+src/.DS_Store
+src/routers/.DS_Store
