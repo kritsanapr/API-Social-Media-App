@@ -15,7 +15,9 @@ const start = () => {
   } catch (err) {
     throw new Error("Database connection error: ");
   }
-  app.listen(port, () => console.log(`Server listening on ${port}`));
+  app.listen(port, () =>
+    console.log(`Server listening on http://localhost:${port}`)
+  );
 };
 
 start();

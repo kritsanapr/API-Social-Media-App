@@ -45,8 +45,21 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.get("/", (req: Request, res: Response, next: NextFunction) => {
+  res.status(200).json({
+    msg: "working.",
+  });
+});
+
+app.get("/help-check", (req: Request, res: Response, next: NextFunction) => {
+  res.status(200).json({
+    msg: "help check working.",
+  });
+});
 
 app.use(currentUser);
 app.use(requireAuth, newPostRouter);
@@ -59,12 +72,6 @@ app.use(showPostRouter);
 
 app.use(requireAuth, newCommentRouter);
 app.use(deleteCommentRouter);
-
-app.get('/help-check', (req, res) => {
-  res.status(200).json({
-    msg: 'help check working.'
-  })
-});
 
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
   next(new NotFoundError());
